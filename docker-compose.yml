@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+    jenkins:
+        build:
+            context: ./
+        restart: unless-stopped
+        environment:
+          - "JAVA_OPTS=-Xmx3g -Xms2G"
+        volumes:
+            - ${HOST_DOCKER}:/var/run/docker.sock
+            - ${HOST_JENKINS_DATA}:/var/jenkins_home
+        ports:
+            - "${HOST_WWW}:8080"
+            - "${HOST_OTHER}:50000"
