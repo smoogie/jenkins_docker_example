@@ -3,6 +3,9 @@ services:
     jenkins:
         build:
             context: ./
+            args:
+                HOST_UID: ${HOST_UID}
+                HOST_GID: ${HOST_GID}
         restart: unless-stopped
         environment:
           - "JAVA_OPTS=-Xmx3g -Xms2G"
