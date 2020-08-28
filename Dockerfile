@@ -1,4 +1,8 @@
 FROM jenkins/jenkins
+
+ARG $HOST_UID=1004
+ARG $HOST_GID=999
+
 USER root
 RUN apt-get -y update && \
     apt-get -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common && \
@@ -10,10 +14,8 @@ RUN curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-c
     chmod +x /usr/local/bin/docker-compose && \
     ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     
-# instead 1004 put your host's uid for jenkins user
-RUN usermod -u 1004 jenkins
-# instead 999 put your host's gid for docker group
-RUN groupmod -g 999 docker
+RUN usermod -u $HOST_UID jenkins
+RUN groupmod -g $HOST_GID docker
 RUN usermod -aG docker jenkins
 
 USER jenkins
