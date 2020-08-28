@@ -1,7 +1,7 @@
 FROM jenkins/jenkins
 
-ARG $HOST_UID=1004
-ARG $HOST_GID=999
+ARG HOST_UID=1004
+ARG HOST_GID=999
 
 USER root
 RUN apt-get -y update && \
